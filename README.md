@@ -1,1 +1,14 @@
-![Open in Codespaces](https://classroom.github.com/assets/open-in-codespaces-abfff4d4e15f9e1bd8274d9a39a0befe03a0632bb0f153d0ec72ff541cedbe34.svg)
+# About this repo
+Call the directory containing make file as root-dir
+
+# Initial Setup
+
+To install eigen run 
+
+`make eigen`
+
+This will:
+
+    1. Fetch eigen (wget required)
+    2. Install eigen in root-dir/eigen/
+# Building
