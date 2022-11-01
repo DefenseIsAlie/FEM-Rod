@@ -1,4 +1,4 @@
-EIGEN = /home/s200010021/cs601pa2-karthikmurakonda/
+EIGEN = ./
 EIGEN_FLAGS = -std=gnu++11 -O3 -march=native
 
 Entry:
