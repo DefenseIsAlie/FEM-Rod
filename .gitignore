@@ -1,2 +1,6 @@
 eigen*/**
 eigen-3.4.0.tar.gz
+Eigen/**
+.vscode/**
+bin/**
+build/**

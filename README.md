@@ -10,5 +10,5 @@ To install eigen run
 This will:
 
     1. Fetch eigen (wget required)
-    2. Install eigen in root-dir/eigen/
+    2. Install eigen in root-dir/Eigen/
 # Building
