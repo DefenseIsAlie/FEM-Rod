@@ -3,11 +3,14 @@ EIGEN_FLAGS = -std=gnu++11 -O3 -march=native
 
 Entry:
 
-bin/test: src/main.cpp
+bin/Eigen_test: src/Eigen_test.cpp
 	mkdir -p bin/
 	g++ -I$(EIGEN) $(EIGEN_FLAGS) $^ -o $@
+	bin/Eigen_test
 
-.PHONY: eigen clean
+.PHONY: eigen clean test
+
+test: bin/Eigen_test
 
 clean:
 	rm -rf bin/
