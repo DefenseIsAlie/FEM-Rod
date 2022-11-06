@@ -1,4 +1,7 @@
-EIGEN = /nfs_home/nikhilh/eigen-3.3.9/
+EIGEN_INC = /nfs_home/nikhilh/eigen-3.3.9/
+ifeq ($(EIGEN), 1)
+EIGEN_INC = ./
+endif
 EIGEN_FLAGS = -std=gnu++11 -O3 -march=native
 
 BLAS_FLAGS = -std=gnu++11 -O3 -march=native -lblas
@@ -9,7 +12,7 @@ Entry:
 
 bin/Eigen_test: src/Eigen_test.cpp
 	mkdir -p bin/
-	g++ -I$(EIGEN) $(EIGEN_FLAGS) $^ -o $@
+	g++ -I$(EIGEN_INC) $(EIGEN_FLAGS) $^ -o $@
 	bin/Eigen_test
 
 bin/blas_test: src/blas_test.cpp
