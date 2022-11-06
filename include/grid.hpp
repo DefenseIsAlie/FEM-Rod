@@ -1,3 +1,5 @@
+#include <Eigen/Dense>
+
 class grid
 {
 private:
