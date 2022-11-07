@@ -63,7 +63,7 @@ double polynomial::getIntegral(double start, double end, int steps){
 
 double polynomial::getnaturalfx(double b, double a, double x){
     double ret = 0;
-    ret = polynomial::getPx((b-a)/2 *x + (b+a)/2);
+    ret = polynomial::getPx(((b-a)/2)*x + (b+a)/2);
     return ret;
 }
 
