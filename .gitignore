@@ -4,3 +4,4 @@ Eigen/**
 .vscode/**
 bin/**
 build/**
+*.out

@@ -2,6 +2,8 @@
 #include<math.h>
 #include<iostream>
 
+#ifndef POLYNOMIAL
+#define POLYNOMIAL
 class polynomial
 {
 private:
@@ -72,3 +74,5 @@ double polynomial::twoPointGuassQuadratureIntegral(double b, double a){
 
     return ret * (b-a) / 2;
 }
+
+#endif
