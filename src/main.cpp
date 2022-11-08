@@ -3,6 +3,7 @@
 #include <Eigen/Dense>
 #include <vector>
 #include <fstream>
+#include <include/solution.hpp>
 
 int main(int argc, char const *argv[])
 {   
@@ -57,7 +58,7 @@ int main(int argc, char const *argv[])
     //     return 0;
     // }
 
-    double P = 5000;
+    double P = -5000;
     // std::cout << "Enter P: ";
     // std::cin >> P;
     // if (P < 0)
@@ -134,27 +135,32 @@ int main(int argc, char const *argv[])
     F(0,0) = P;
 
   // F.resize(N,1);
-    Eigen::MatrixXd newK = K.block(0,1,N,N);
+    Eigen::MatrixXd newK = K.block(0,0,N,N);
     Eigen::MatrixXd newF = F.block(0,0,N,1);
-    Eigen::MatrixXd U = newK.colPivHouseholderQr().solve(newF);
+    Eigen::MatrixXd U = newK.inverse()*newF;
 
-    std::cout << U.reverse() << std::endl;
+    //std::cout << K << "\n" << "\n" <<std::endl;
+    //std::cout << newK << "\n" << "\n" <<std::endl;
 
+    
     Eigen::MatrixXd solution = Eigen::MatrixXd::Zero(N+1,2);
     for (int i = 0; i < N; i++)
     {
         solution(i,0) = i*h;
-        solution(i,1) = U(N-i-1,0);
+        solution(i,1) = U(i,0);
     }
     solution(N,0) = L;
     solution(N,1) = 0;
 
     // print solution to file.txt
-    std::ofstream file;
-    file.open("file.txt");
-    file << "\t \t\tX , U(i)" << "\n";
-    file << solution;
-    file.close();
+    // std::ofstream file;
+    // file.open("file.txt");
+    // file << "\t \t\tX , U(i)" << "\n";
+    // file << solution;
+    // file.close();
+
+
+    sol::constantsolution();
     
     
     
