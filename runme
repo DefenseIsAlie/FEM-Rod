@@ -2,12 +2,10 @@
 RED='\033[0;31m'
 EIGEN=0
 
-if [ ! -d "/nfs_home/nikhilh/eigen-3.3.9/" ]
-    then
-    echo -e "${RED}Downloading Eigen ---> Please give acces to Wget and Internet !!"
-    make eigen
-    EIGEN=1
-    echo -e "$(tput setaf 2)Succesfully installed Eigen."
-fi
+make clean
 
-make EIGEN=${EIGEN}
+make
+
+bin/solution 0
+
+bin/solution 1
