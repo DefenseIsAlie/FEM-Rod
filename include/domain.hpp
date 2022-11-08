@@ -5,6 +5,8 @@
     Todo:   Getters Setters
               
 */
+#ifndef DOMAIN_
+#define DOMAIN_
 
 class domain
 {
@@ -32,3 +34,7 @@ domain::~domain()
 {
     delete this->areaFunction;
 }
+
+
+
+#endif

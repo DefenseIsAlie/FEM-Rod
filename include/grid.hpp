@@ -11,8 +11,8 @@
 class grid
 {
 private:
-    domain *d = NULL;
     int ndims;
+
 public:
     grid(int ndims);
     ~grid();
@@ -25,9 +25,5 @@ grid::grid(int ndims)
 
 grid::~grid()
 {   
-    if (d!=NULL)
-    {
-        delete d;
-    }
     
 }

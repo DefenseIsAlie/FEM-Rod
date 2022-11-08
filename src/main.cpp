@@ -2,6 +2,7 @@
 #include <include/polynomial.hpp>
 #include <Eigen/Dense>
 #include <vector>
+#include <fstream>
 
 int main(int argc, char const *argv[])
 {   
@@ -20,12 +21,65 @@ int main(int argc, char const *argv[])
         N = 2,8,32,128
     */
 
-    int N = 16;
+    int N = atoi(argv[1]);
+    // std::cout << "Enter N: ";
+    // std::cin >> N;
+    // if (N < 2)
+    // {
+    //     std::cout << "N must be greater than 2" << std::endl;
+    //     return 0;
+    // }
+
     double L = 0.5;
-    double Ao = 12.5 * pow(10,-4);
-    double Y = 70 * pow(10,9);
-    double h = L/N;
+    // std::cout << "Enter L: ";
+    // std::cin >> L;
+    // if (L < 0)
+    // {
+    //     std::cout << "L must be greater than 0" << std::endl;
+    //     return 0;
+    // }
+
+    double Ao = 12.5 * pow(10, -4);
+    // std::cout << "Enter Ao: ";
+    // std::cin >> Ao;
+    // if (Ao < 0)
+    // {
+    //     std::cout << "Ao must be greater than 0" << std::endl;
+    //     return 0;
+    // }
+
+    double Y = 70 * pow(10, 9);
+    // std::cout << "Enter Y: ";
+    // std::cin >> Y;
+    // if (Y < 0)
+    // {
+    //     std::cout << "Y must be greater than 0" << std::endl;
+    //     return 0;
+    // }
+
     double P = 5000;
+    // std::cout << "Enter P: ";
+    // std::cin >> P;
+    // if (P < 0)
+    // {
+    //     std::cout << "P must be greater than 0" << std::endl;
+    //     return 0;
+    // }
+
+    std::vector<double> x(3);
+
+    // std::cout << "Enter polynomial coefficients of Area polynomial(divided by A0): " << std::endl;
+    // std::cout << "For example 1 2 for given question A0*(1+x/L) that is A0(1+2x) given L = 0.5" << std::endl;
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     std::cout << "Enter coefficient of x^" << i << ": ";
+    //     std::cin >> x[i];
+    // }
+    polynomial p1({1,2, 0},{0});
+
+
+
+    double h = L/N;
 
     Eigen::MatrixXd K = Eigen::MatrixXd::Zero(N+1,N+1);
     Eigen::MatrixXd F = Eigen::MatrixXd::Zero(N+1,1);
@@ -41,7 +95,6 @@ int main(int argc, char const *argv[])
     {   
         double xa = i*h;
         double xb = (i+1)*h;
-        polynomial p1({1,1/L},{0});
         double integral = ((Y*Ao)/ (h*h))*p1.twoPointGuassQuadratureIntegral(xb,xa);
 
         Kvalues[i][0] = integral;
@@ -83,16 +136,25 @@ int main(int argc, char const *argv[])
   // F.resize(N,1);
     Eigen::MatrixXd newK = K.block(0,1,N,N);
     Eigen::MatrixXd newF = F.block(0,0,N,1);
-    Eigen::MatrixXd U = newK.inverse()*newF;
+    Eigen::MatrixXd U = newK.colPivHouseholderQr().solve(newF);
 
-//     std::cout << newK << std::endl;
-//     std::cout << newF << std::endl;
-//     std::cout << F << std::endl;
+    std::cout << U.reverse() << std::endl;
 
-     std::cout << U.reverse() << std::endl;
+    Eigen::MatrixXd solution = Eigen::MatrixXd::Zero(N+1,2);
+    for (int i = 0; i < N; i++)
+    {
+        solution(i,0) = i*h;
+        solution(i,1) = U(N-i-1,0);
+    }
+    solution(N,0) = L;
+    solution(N,1) = 0;
 
-    polynomial test({1,1},{0});
-    std::cout << test.twoPointGuassQuadratureIntegral(10,0) << std::endl;
+    // print solution to file.txt
+    std::ofstream file;
+    file.open("file.txt");
+    file << "\t \t\tX , U(i)" << "\n";
+    file << solution;
+    file.close();
     
     
     
