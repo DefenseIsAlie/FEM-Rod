@@ -61,7 +61,7 @@ namespace sol
     F(0,0) = P;
 
   // F.resize(N,1);
-    Eigen::MatrixXd newK = K.block(0,1,N,N);
+    Eigen::MatrixXd newK = K.block(0,0,N,N);
     Eigen::MatrixXd newF = F.block(0,0,N,1);
     // newF(0,0) = P;
      Eigen::MatrixXd U = newK.inverse()*newF;

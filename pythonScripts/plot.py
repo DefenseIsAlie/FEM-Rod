@@ -24,7 +24,7 @@ for line in f:
 
 X = np.array(X)
 Y = np.array(Y)
-Analytical_Y = variableArea(X)
+#Analytical_Y = variableArea(X)
 
 #print(Analytical_Y)
 
@@ -38,7 +38,7 @@ def constantArea(X):
 
 
 for n_ele in N:
-    os.system(f"./variable.out {n_ele}")
+    os.system(f"./constant.out {n_ele}")
     f = open("/home/abhishekj/projects/cs601pa2-karthikmurakonda/pythonScripts/file.txt")
     X = []
     Y = []
@@ -60,11 +60,11 @@ for n_ele in N:
     ax.set_xlabel('x')
     ax.set_ylabel('u')
 
-    Analytical_Y = variableArea(X)
+    Analytical_Y = constantArea(X)
     error = np.sum((Y-Analytical_Y)**2)
-    ax.set_title(f'Variable Area N = {n_ele} error = {error}')
+    ax.set_title(f'Constant Area N = {n_ele} error = {error}')
     ax.plot(X,Y, label=f'Numerical')
     ax.plot(X,Analytical_Y, label=f'Analytical')
     ax.legend() 
-    fig.savefig(f'Variable {n_ele}')
+    fig.savefig(f'Constant {n_ele}')
     print(X)
