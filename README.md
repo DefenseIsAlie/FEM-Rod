@@ -39,3 +39,5 @@ Clone the repository using git clone cd to the project root
 2.  `$ bin/solution 1 ` for variable area solution.
 
 3.  `$ bin/solution   ` to define the constants like N and area manually.
+
+This prints X, U(i) (which is elongation at X) in file.txt
