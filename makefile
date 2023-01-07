@@ -1,5 +1,5 @@
 EIGEN_INC = /nfs_home/nikhilh/eigen-3.3.9/
-ifeq ($(EIGEN), 1)
+ifeq ($(EIGEN), 0)
 EIGEN_INC = ./
 endif
 EIGEN_FLAGS = -std=gnu++11 -O3 -march=native
